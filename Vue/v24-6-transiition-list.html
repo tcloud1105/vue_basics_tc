@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue Project</title>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <style>
+       body{margin:0px;padding:20px;font-size:33px;}
+      .fade-enter,.fade-leave-to{
+         opacity:0;transform:translateY(25px)
+        }
+      .fade-enter-active,.fade-leave-active{
+         transition:all 2s
+       }
+    </style>
+    <script type='text/javascript' src='vue.js'></script>
+   </head>
+   <body>
+     <div id="app">
+        <ul>
+           <transition-group name='fade'>
+              <li v-for='element in list_info' v-bind:key='element'>{{element}}</li>
+           </transition-group>
+        </ul>
+        <input v-model='new_item'/>
+        <br/>
+        <button v-on:click='add'>Add</button>
+        <button v-on:click='remove'>Remove</button>
+    </div>
+    <script type='text/javascript'>
+        var vm = new Vue({
+          el:'#app',
+          data:{
+             list_info:['apple','orange','banana',],
+             new_item:'',
+           },
+          methods:{
+             add:function(){
+                if(this.new_item.length){
+                    this.list_info.push(this.new_item)
+                    this.new_item=''
+               }
+            },
+             remove:function(){
+                   this.list_info.pop()
+               }
+            },
+        })
+ 
+    </script> 
+  </body>
+</html>

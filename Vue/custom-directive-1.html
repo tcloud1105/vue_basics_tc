@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	 
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	  <p v-if='show' v-test>I am a p tag</p><!-- v-name_of_custom_directive(v-test) should be installed on the element-->
+	  <button @click='show=!show'>show/hide</button>
+	</div>
+	
+	
+	 <script type="text/javascript">
+	    Vue.directive('test',{
+		   // all hooks are installed here...
+		   bind:function(el){
+		     console.log("I am the bind hook");
+			 console.log(el.parentNode);
+		   },
+		   inserted:function(el){
+		     console.log("I am the inserted hook");
+			 console.log(el.parentNode);
+		   },
+		   unbind:function(el){
+		     console.log("I am the unbind hook");
+		   }
+		 })
+	 
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   show:true,
+		 },
+		 
+	   })
+	 </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+  <html>
+      <head>
+	      <script type="text/javascript" src="vue2.3.js"></script>
+	  </head>
+	  <body>
+		<script>
+	        var vm = new Vue({
+		       el:'#app',
+		       data:{
+			       msg:'MSG defined in Vue data',
+		        },
+		        beforeCreate:function(){console.log('HOOK: beforeCreate')},
+		        created:function(){console.log('HOOK: created')},
+		        beforeMount:function(){console.log('HOOK: beforeMount')},
+		        mounted:function(){console.log('HOOK: mounted')},
+		        beforeUpdate:function(){console.log('HOOK: beforeUpdate')},
+		        updated:function(){console.log('HOOK: updated')},
+		        beforeDestroy:function(){console.log('HOOK: beforeDestroy')},
+		       destroyed:function(){console.log('HOOK: destroyed')},
+	        })
+	       //vm.msg = 'updated value'
+	       vm.$destroy()
+		 </script>
+	   </body>
+	</html>
+	
+		
+	
+
+
+
+           

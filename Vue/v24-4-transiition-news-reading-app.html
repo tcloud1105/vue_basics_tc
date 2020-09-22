@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Vue Project</title>
+		<meta http-equiv='content-type' content='text/html;charset=utf-8'>
+		<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+		<link rel="stylesheet" href="./fontawesome/css/font-awesome.css">
+		<style>
+			h1.h2,h3,h4,h5,h6,p,span,li,ul,ol,input{margin:0;padding:0;word-break:break-all;list-style:none;}
+			.button-size{font-size:36px;}
+			h1{text-align:center;}
+			#line{height:1px;}
+			#category{color:white;text-align:right;padding-right:5px;background:yellow;font-size:16px;line-height:22px;font-family:helvetica;font-weight:bold;}
+			#article-area{padding-top:6px;padding-bottom:6px;}
+			#article-info{text-align:right;font-size:12px;font-style:italic;font-family:helvetica;color:gray;line-height:18px;}
+			.warning{border:1px solid red;color:red;}
+			.fade-enter, .fade-leave-to{opacity:0}
+			.fade-enter-active, .fade-leave-active{transition:opacity 0.5s}
+		</style>
+		<script type='text/javascript' src='vue2.3.js'></script>
+	<body>
+		<div id='app'>
+			<i v-if='show' v-on:click='show=!show' title='Edit' class="button-size fa fa-pencil-square" aria-hidden="true"></i>
+			<i v-if='!show' v-on:click='save' title='Save' class="button-size fa fa-floppy-o" aria-hidden="true"></i>
+				<transition name='fade' mode='out-in'>
+				<div v-if='show' id='reading-mode' key='r'>
+					<reading-comp :title='title' :author='author' :date='date' :category='category' :theme_color='category_theme_color[category]'><!--no dot here-->
+						<div id='article-area'>{{article}}</div>
+					</reading-comp>
+				</div>
+				<div v-if='!show' id='editing-mode' key='e'>
+					<div v-bind:class='{warning:!remain}'><label>Article Title: </label><input v-model='title' v-on:input='check'/><span>{{remain}}/{{limit}}</span></div>
+					<div><label>Author Name: </label><input v-model='author'/></div>
+					<ul>
+						<li v-for='element in category_list'>
+							<label>{{element}}</label>
+							<input type='radio'  v-model='category'  v-bind:value='element'/>
+						</li>
+					</ul>
+					<div><label>Article: </label><textarea v-model='article'></textarea></div>
+				</div>
+				</transition>
+		</div>
+		<template id='reading-temp'>
+			<div>
+				<h1>{{title}}</h1><!--title is a prop--> 
+				<div id='line' v-bind:style='{background:theme_color}'></div>
+				<slot></slot><!--article displayed here...-->
+				<div id='line' v-bind:style='{background:theme_color}'></div>
+				<p id='article-info'>Created by <span>{{author}}</span> and last edited at <span>{{date}}</span></p>
+				<div id='category' v-bind:style='{background:theme_color}'><span>{{category}}</span></div>
+				<!--author, date, category are props-->
+			</div>
+		</template>
+	<script type='text/javascript'>
+		Vue.component('reading-comp',{
+			template:'#reading-temp',
+			props:['title','author','date','category','theme_color'],
+			data:function(){
+				return{}
+			},
+			methods:{},
+		})
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				show:true,
+				limit:50,
+				title:'A course on Vue.js 2.0+',
+				article:'OnlyKiosk developed a Vue course. OnlyKiosk developed a Vue course. OnlyKiosk developed a Vue course. OnlyKiosk developed a Vue course. OnlyKiosk developed a Vue course. OnlyKiosk developed a Vue course. OnlyKiosk developed a Vue course. OnlyKiosk developed a Vue course. ',
+				author:'OnlyKiosk',
+				date:'2017', // This is a temporary initial value...
+				category:'Tech',
+				category_list:['Web','Tech','News','Science','Sports'],
+				category_theme_color:{
+					Web:'Crimson',
+					Tech:'Teal',
+					News:'Green',
+					Science:'Violet',
+					Sports:'Orange',
+				}
+				// we will deal with theme color later...
+			},
+			computed:{
+				remain:function(){
+					return this.limit - this.title.length
+				}
+			},
+			methods:{
+				save:function(){
+					var date = new Date()
+					var year = String(date.getFullYear())
+					var year_two_digit = "'"+year.substr(2,2) // '17
+					
+					var month = date.getMonth()+1
+					switch(month){
+						case 1:
+						var month_str = 'Jan'
+						break;
+						case 2:
+						var month_str = 'Feb'
+						break;
+						case 3:
+						var month_str = 'Mar'
+						break;
+						case 4:
+						var month_str = 'Apr'
+						break;
+						case 5:
+						var month_str = 'May'
+						break;
+						case 6:
+						var month_str = 'Jun'
+						break;
+						case 7:
+						var month_str = 'Jul'
+						break;
+						case 8:
+						var month_str = 'Aug'
+						break;
+						case 9:
+						var month_str = 'Sep'
+						break;
+						case 10:
+						var month_str = 'Oct'
+						break;
+						case 11:
+						var month_str = 'Nov'
+						break;
+						case 12:
+						var month_str = 'Dec'
+						break;
+					}
+					var day = date.getDate()
+					if(day<=9){
+						day = '0'+day
+					}
+					var hour = date.getHours()
+					var min = date.getMinutes()
+					var sec = date.getSeconds()
+					var mdy = month_str+' '+day+' '+year_two_digit
+					var hms = hour+':'+min+':'+sec
+					var ymdhms = mdy+' '+hms
+					this.date = ymdhms
+					this.show = !this.show // restore the switch here
+				},
+				check:function(){
+					if(this.remain<0){
+						this.title = this.title.substr(0,this.limit)
+					}
+				}
+			},
+		})
+	</script>	
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

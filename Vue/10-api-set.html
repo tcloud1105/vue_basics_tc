@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Vue Project</title>
+     <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+     <style>
+     </style>
+     <script type='text/javascript' src='vue2.3.js'></script>
+  <body>
+     <div id="app">
+        <p>{{msg}}</p>
+     </div>
+  <script type='text/javascript'>
+      var vm = new Vue({
+         el:'#app',
+        data:{
+            msg:'msg defined in Vue data',
+        },
+ 
+      })
+	  
+     vm.$set(
+        vm.$options,
+        'my_option',
+        'value of my option'
+        )
+      vm.$delete(
+         vm.$options,
+         'my_option'
+       )
+    //vm.$set(
+     // vm.$data,
+     // 'new_msg',
+     // 'never do this!!!!!!'
+    //)
+    vm.$set(
+      vm.$data,
+        'msg',
+        'you can do this...'
+      )
+     //vm.$delete(
+     // vm.$data,
+     // 'msg' // never do this!!!!!!
+     //)
+    </script> 
+  </body>
+</html>

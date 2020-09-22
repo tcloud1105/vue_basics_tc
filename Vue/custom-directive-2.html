@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	 
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	  <p v-test>The number is: <b>{{number}}</b></p><hr>
+	  <button @click='show=!show'>add one</button>
+	</div>
+	
+	
+    
+	 <script type="text/javascript">
+	    Vue.directive('test',{
+		   // all hooks are installed here...
+		   update:function(){console.log("UPDATE: "+el.innerText)};
+		   componentUpdated:function(){console.log("COMPONENT UPDATED: "+el.innerText)};
+		 })
+	 
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   number:1,
+		 },
+		 method:{
+		    add:function(){
+			  this.number++
+			}
+		  }
+		 
+	   })
+	 </script>
+  </body>
+</html>

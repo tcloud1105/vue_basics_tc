@@ -1,0 +1,42 @@
+<!DOCTYPE html><!--Version Declaration-->
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	    h1,div,p.span{font-size:18px;font-family:helvetica}
+		.warning{border:red solid 2px}
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	   <textarea v-bind:class='warning:!remain'v-model="message" v-on:input='check'></textarea>
+	   <p>{{remain}}/{{limit}}</p><!-- remain: how many characters left. limit: maximum character number-->
+	</div>
+    
+	 <script type="text/javascript">
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		    message:'User-submitted data stored here...',
+			limit:50
+		 },
+		 computed{
+		   remain:function(){
+		     return this.limit - this.message.length;
+		   }
+		 },
+		 methods:{
+		   check:function(){
+		     if(this.remain.<0){
+			   this.message = this.message.substr(0,this.limit);
+			 }
+		   }
+		 }
+	   })
+	 </script>
+  </body>
+</html>

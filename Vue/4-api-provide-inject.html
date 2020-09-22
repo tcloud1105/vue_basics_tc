@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Vue Project</title>
+     <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+     <style>
+         h1,h2,h3,h4,h5,h6,div,p,span{font-family:helvetica;padding:0;margin:0;list-stle:none}
+     </style>
+     <script type='text/javascript' src='vue2.3.js'></script>
+  <body>
+     <div id='app'>
+        <comp></comp>
+     </div>
+     <template id='temp'>
+         <div id='comp_root'>
+            <p>{‌{msg}}</p>
+         </div>
+     </template>
+    <script type='text/javascript'>
+       Vue.component('comp',{
+           template:'#temp',
+           inject:['msg'],
+           data:function(){
+              return{
+                 msg:this.msg
+              }
+           }
+       })
+       var vm =new Vue({
+          el:'#app',
+          provide:{
+              msg:'msg defined in Vue data'
+          },
+       })
+ 
+ </script> 
+ </body>
+</html>

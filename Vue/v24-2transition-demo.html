@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <style>
+	    body{padding:20px;}
+		.status{// transition should be applied to all css properties involved into the animation
+		// always put the transition in a perpetual place for example .status not .status:hover
+		  background:crimson;
+		  height:300px;width:300px;
+		  //transition:background 2s,height 2s, width 2s;
+		  transition: all 2s // shortcut for all properties
+		}
+		
+		.status:hover{
+		  background:orange;
+		  height:600px;width:600px;
+		}
+	 </style>
+   </head>
+   <body>
+      <div class="status"></div>
+   </body>
+</html>

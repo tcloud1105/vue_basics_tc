@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+  <html>
+      <head>
+	      <script type="text/javascript" src="vue2.3.js"></script>
+	  </head>
+	  <body>
+		<script>
+	        var vm = new Vue({
+		       el:'#app',
+		       data:{
+			       msg:'MSG defined in Vue data',
+		        },
+		        beforeCreate:function(){console.log(this.$el)},
+		        created:function(){console.log(this.$el)},
+				
+		        beforeMount:function(){console.log(this.$el)},
+		        mounted:function(){console.log(this.$el)},
+				
+		        beforeUpdate:function(){console.log(this.$el)},
+		        updated:function(){console.log(this.$el)},
+				
+		        beforeDestroy:function(){console.log(this.$el)},
+		       destroyed:function(){console.log(this.$el)},
+	        })
+	       //vm.msg = 'updated value'
+	       vm.$destroy()
+		 </script>
+	   </body>
+	</html>
+	
+		
+	
+
+
+
+           

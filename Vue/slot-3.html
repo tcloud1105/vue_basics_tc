@@ -1,0 +1,42 @@
+<!DOCTYPE html><!--Version Declaration-->
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	    h1,h2,h3,h4,h5,h6,p,span,li,ul,ol,input{margin:0;padding:0}
+		p{margin-top:10px;}
+		.first{color:white;background:red;text-align:center;}
+		.second{color:yellow;background:blue;text-align:center;}
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	  <comp>
+	     <p class='first' slot='bottom'>FIRST PARAGRAPH</p>
+	     <p class='second' slot='top'>SECOND PARAGRAPH</p>
+		 <p>THIRD Paragraph</p>
+	  </comp>
+	</div>
+	
+	<template id='temp'>
+	  <slot name='top'></slot>
+	  <slot name='bottom'></slot><!--named slot-->
+	  <slot></slot>
+	</template>
+    
+	 <script type="text/javascript">
+	 Vue.component('comp',{
+	    template:'#temp'
+	 })
+	 
+	   var vm = new Vue({
+	     el:'#app',
+		 
+	   })
+	 </script>
+  </body>
+</html>

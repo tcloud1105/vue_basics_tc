@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue Project</title>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+    <style>
+       h1,h2,h3,h4,h5,h6,div,p,span{font-family:helvetica;padding:0;margin:0;list-stle:none}
+    </style>
+    <script type='text/javascript' src='vue2.3.js'></script>
+ <body>
+    <div id='app'>
+      <p>{‌{msg1}}</p>
+      <p>{‌{msg2}}</p>
+      <p>{‌{msg3}}</p>
+      <hr/>
+      <comp ref='comp' prop1='first' prop2='second' prop3='third'></comp>
+    </div>
+    <template id='temp'>
+       <div id='comp_root'>
+          <p>{‌{msg1}}</p>
+          <p>{‌{msg2}}</p>
+          <p>{‌{msg3}}</p>
+      </div>
+    </template>
+   <script type='text/javascript'>
+      Vue.component('comp',{
+        template:'#temp',
+        props:['prop1','prop2','prop3'],// comp.$props access the props property
+        data:function(){
+        return{
+            msg1:'Comp msg1',
+            msg2:'Comp msg2',
+            msg3:'Comp msg3',
+        }
+      }
+   })
+     var vm =new Vue({
+        el:'#app',// vm.$el
+        data:{// vm.$data to access data property object
+           msg1:'Vue Data Msg1',
+           msg2:'Vue Data Msg2',
+           msg3:'Vue Data Msg3',
+       },
+     })
+   var comp = vm.$refs.comp
+   </script> 
+ </body>
+</html>

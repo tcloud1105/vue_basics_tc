@@ -1,0 +1,51 @@
+<!DOCTYPE html><!--Version Declaration-->
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	 
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	   <comp v-bind:items='list_info'>
+	   <template scope='obj'>
+	       <li>
+		     The brand is {{obj.brand}} and the model is {{obj.model}}
+		   </li>
+		<template>
+	   </comp>
+	</div>
+	
+	<template id='temp'>
+	  <div>
+	    <ul>
+		  <slot v-for='element in items' :brand='element.brand' :model='element.model'></slot>
+		</ul>
+	  </div>
+	</template>
+    
+	 <script type="text/javascript">
+		Vue.component('comp',{
+		  template:'#temp',
+		  props:['items']<!--items will be stored here-->
+		})
+		
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   list_info:[
+		     {brand:'Toyota',model:'Supra'},
+			 {brand:'Toyota',model:'LC 79'},
+			 {brand:'Honda',model:'Civic'},
+			 {brand:'Nissan',model:'GT-R'},
+		   ]
+		 }
+	   })
+	 </script>
+  </body>
+</html>

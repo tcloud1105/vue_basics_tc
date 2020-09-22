@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title>Vue Project</title>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+    <style>
+        .fade-enter-active,.fade-leave-active{transition:opacity 2s}
+        .fade-enter,.fade-leave-to{opacity:0;}
+    </style>
+	 <script type='text/javascript' src='vue2.3.js'></script>
+ </head>
+
+ <body>
+    <div id='app'>
+       <transition name='fade' mode='out-in'>
+          <component v-bind:is='mode_index'></component>
+       </transition>
+       <hr/>
+       <button @click='switch_comp'>Switch Mode</button>
+     </div>
+     <template id='temp1'>
+         <div style='color:red;font-family:helvetica'>
+             <p>Comp: 1</p>
+         </div>
+     </template>
+     <template id='temp2'>
+        <div style='color:green;font-family:helvetica'>
+           <p>Comp: 2</p>
+        </div>
+     </template>
+     <template id='temp3'>
+         <div style='color:blue;font-family:helvetica'>
+             <p>Comp: 3</p>
+         </div>
+     </template>
+      <script type='text/javascript'>
+         Vue.component('comp1',{
+             template:'#temp1',
+          })
+         Vue.component('comp2',{
+             template:'#temp2',
+          })
+         Vue.component('comp3',{
+             template:'#temp3',
+          })
+        var vm = new Vue({
+           el:'#app',
+          data:{
+             mode_index:'comp1'
+          },
+        methods:{
+           switch_comp:function(){
+              switch(this.mode_index){
+                 case 'comp1':
+                   this.mode_index='comp2'
+                   break;
+                 case 'comp2' :
+                   this.mode_index='comp3'
+                   break;
+                 case 'comp3' :
+                   this.mode_index='comp1'
+                   break;
+                }
+            }
+       }
+    })
+   </script> 
+ </body>
+</html>

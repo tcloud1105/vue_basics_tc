@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	  body{margin-left:40px;}
+	  h1,div,p,span{font-size:33px;font-family:helvetica}
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	 <span>{{message}}</span>
+	 <p v-show="message">V-SHOW: New P tag</p>
+	 <p v-if="message==2">V-IF: New P tag</p>
+	 <p v-else-if="message==1">V-IF: New P tag</p>
+	 <p v-else>V-ElSE: New P tag</p>
+	   <button @click="message=!message"></button>
+	</div>
+    
+	 <script type="text/javascript">
+		
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   message:3
+		 },
+		 methods:{
+		   
+		}
+	   })
+	 </script>
+  </body>
+</html>

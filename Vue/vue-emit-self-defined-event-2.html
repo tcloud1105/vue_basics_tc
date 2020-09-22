@@ -1,0 +1,64 @@
+<!DOCTYPE html><!--Version Declaration-->
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	   h1,h2,h3,h4,h5,h6,div,p,span{font-family:helvetica;padding:0;margin:0;font-size:36px}
+	   .comp_root{background:red;color:white;}
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	   <h1>Parent DIV</h1>
+	   <comp v-on:relay='allocate'></comp>
+	   <hr/>
+	   <p>{{content1}}</p><hr>
+	   <p>{{content2}}</p>
+	</div>
+    
+	 <template id="temp">
+	    <div class='comp_root'>
+		  <h2>Component</h2>
+		  <input v-model='message1' /><hr>
+		  <input v-model='message2' />
+		  <button v-on:click='send'>Send Button</button>
+		</div>
+	 </template>
+	 
+	 <script type="text/javascript">
+		Vue.component('comp',{
+		  template:'#temp',
+		  data: function(){
+		     return {
+			   message1:"Stored in MSG 1",
+			   message2:"Stored in MSG 2"
+			 }
+		  },
+		  props:['prop'], 
+		  methods:{
+		    send:function(){
+			  this.$emit('relay',this.message1, this.message2) 
+			}
+		  }, 
+		})
+		
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   content1:"Controlled By Content 1",
+		   content2:"Controlled By Content 2"
+		 },
+		 methods:{
+		    allocate:function(v1,v2){
+			  this.content1 = v1;
+			  this.content2 = v2;
+			}
+		 }
+	   })
+	 </script>
+  </body>
+</html>

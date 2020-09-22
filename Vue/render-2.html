@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	 
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	   <comp></comp>
+	</div>
+	
+	<template id='temp'>
+	  <div style="font-family:helvetica;background:crimson;color:white;">
+	    <p>this is a comp</p>
+	  </div>
+	</template>
+    
+	 <script type="text/javascript">
+	 Vue.component('comp',{
+	    //template:'#temp',
+	   render:function(createElement){
+	     var p = createElement(// how to create div tag with a p within it using render
+		   'p',
+		   'Content we want to put in P tag...'
+		 )
+		 var p2 = createElement(// how to create div tag with a p within it using render
+		   'p',
+		   'Content we want to put in P tag...'
+		 )
+		 return createElement(
+		   'div',
+		   [p,p2]
+		 )
+	   }
+	 })
+	 
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   msg:'MSG defined in Vue data'
+		 },
+		 
+	   })
+	 </script>
+  </body>
+</html>

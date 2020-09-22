@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Vue Project</title>
+  <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+  <style>
+      #app{background:crimson;color:white;padding:10px;font-size:44px;}
+   </style>
+   <script type='text/javascript' src='vue2.3.js'></script>
+  </head>
+ <body>
+    <div id="app">
+       <p>{{msg}}</p>
+    </div>
+    <script type='text/javascript'>
+       var vm = new Vue({
+        //el:'#app',
+        data:{
+           msg:'MSG defined in Vue data'
+        },
+      })
+        vm.$mount('#app')
+ </script> 
+ </body>
+</html>

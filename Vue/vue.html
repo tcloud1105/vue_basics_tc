@@ -1,0 +1,33 @@
+<!DOCTYPE html><!--Version Declaration-->
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	  h1,div,p,span{font-size:33px;font-family:helvetica}
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app"><!--View -->
+	   <p>My name is <span v-text='name'></span> or <span>{{name}}</span></p> <!-- v-text is vue directive -->
+	   <p v-html='name2'></p>
+	</div>
+    
+	 <script type="text/javascript">
+       // Model	   
+	   var model = {
+		   name:'Tcloud World',
+		   name2:'<b>New message</b>'
+		}
+		
+		// ViewModel
+	   var vm = new Vue({
+	     el:'#app',
+		 data:model,
+	   })
+	 </script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Vue Project</title>
+		<meta http-equiv='content-type' content='text/html;charset=utf-8'>
+		<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+		<style>
+			h1.h2,h3,h4,h5,h6,p,span,li,ul,ol,input{margin:0;padding:0;font-family:helvetica;}
+			body{padding:10px;}
+			.comp_1{border:#02a7f3 1px solid;border-radius:5px;padding:10px;width:280px;height:60px;}
+			.comp_2{border:#ff6bee 1px solid;border-radius:5px;padding:10px;width:280px;height:60px;}
+			p{margin-bottom:10px;}
+			.style{background:#ff6bee;color:white;line-height:24px;}
+			.highlight{color:white;background:red;}
+		</style>
+		<script type='text/javascript' src='vue.js'></script>
+	<body>
+		<div id='app'>
+			<p class='highlight'>{{msg}}</p>
+			<hr/>
+			<comp1 v-on:to_vue_data='msg=arguments[0]'></comp1>
+			<hr/>
+			<comp2></comp2>
+		</div>
+		<template id='temp1'>
+			<div class='comp_1'>
+				<p>Component 1:</p>
+				<input v-model='message'/>
+				<button v-on:click='send'>Click to Send</button>
+			</div>
+		</template>
+		<template id='temp2'>
+			<div class='comp_2'>
+				<p>Component 2:</p>
+				<p>{{message_comp_2}}</p>
+			</div>
+		</template>
+	<script type='text/javascript'>
+		var bus = new Vue()
+		Vue.component('comp1',{
+			template:'#temp1',
+			data:function(){
+				return{
+					message:'message to be sent...',
+				}
+			},
+			methods:{
+				send:function(){
+					this.$emit('to_vue_data',this.message)
+					bus.$emit('to_comp2',this.message)
+				}
+			},
+		})
+		Vue.component('comp2',{
+			template:'#temp2',
+			data:function(){
+				return{
+					message_comp_2:'Waiting for message...',
+				}
+			},
+			created:function(){
+			var that = this
+				bus.$on('to_comp2',function(v){
+					that.message_comp_2=v // can we do this???
+				})
+				//bus.$on('to_comp2',function(v){
+				//	that.message_comp_2=v // can we do this???
+				//}.bind(this))
+			},
+		})
+		var vm =new Vue({
+			el:'#app',
+			data:{
+				msg:'MSG is defined in Vue data'
+			},
+		})
+	</script>	
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

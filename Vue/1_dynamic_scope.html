@@ -1,0 +1,59 @@
+<!DOCTYPE html><!--Version Declaration-->
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+      <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+     <style>
+       *{margin:0;padding:0;}
+       body{text-align:center;line-height:150px;font-family:helvetica;padding:20px;}
+      .comp1{color:red;background:yellow;font-size:55px;border:5px white solid}
+      .comp2{color:orange;background:gray;font-size:55px;border:5px white solid}
+      .comp3{color:white;background:crimson;font-size:55px;border:5px white solid}
+     </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	  <keep-alive>
+	   <component is='comp2'></component>
+	  </keep-alive>
+	</div>
+	
+	<script type='text/x-template' id='temp1'>
+	   <div v-once>
+	    <p class='comp1'>this is comp 1</p>
+	  </div>
+	</script>
+	<template id='temp2'>
+	  <div v-once>
+	    <p class='comp2'>this is comp 2</p>
+	  </div>
+	</template>
+	<template id='temp3'>
+	  <div v-once>
+	    <p class='comp2'>this is comp 3</p>
+	  </div>
+	</template>
+    
+	 <script type="text/javascript">
+		Vue.component('comp1',{
+		  template:'#temp1',
+		})
+		Vue.component('comp2',{
+		  template:'#temp2',
+		})
+		Vue.component('comp3',{
+		  template:'#temp3',
+		})
+		
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   
+		 }
+	   })
+	 </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	 
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	  <p v-test="{fruit:'apple'}">{{msg}}</p><hr>
+	  <button @click='update'>Update</button>
+	</div>
+	
+	
+    
+	 <script type="text/javascript">
+	    Vue.directive('test',function(el,binding){
+		   console.log('bind and update');
+		   console.log(binding.value.fruit);
+		 })
+	 
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   msg:'msg defined in Vue data'
+		 },
+		 method:{
+		    update:function(){
+			  this.msg='updated value'
+			}
+		  }
+		 
+	   })
+	 </script>
+  </body>
+</html>

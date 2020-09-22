@@ -1,0 +1,50 @@
+<!DOCTYPE html><!--Version Declaration-->
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	   h1,div,p,span,input{font-size:33px;font-family:helvetica;margin-top:10px;}
+	   input{width:50px;height:40px;font-size:36px;}
+	   span{color:red}
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	  <div id="frame">
+	     <p>First Name:</p><input v-model="first_name"/>
+	     <p>Family Name:</p><input v-model="family_name"/>
+		 <div class="line"></div>
+		 <p>Full Name: </p><input v-model="full_name"/>
+	  </div>
+	</div>
+    
+	 <script type="text/javascript">
+		
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   first_name:'',
+		   family_name:''
+		 },
+		 computed:{
+		   full_name:{
+		     get:function(){
+			 // get things for yourself
+			   return this.first_name +' '+this.family_name
+			 },
+			 set:function(v){
+			 // set things for others
+			 var array = v.split(' ');
+			   this.first_name = array[0]
+			   this.family_name = array[array.lenghth -1];
+			 }
+		   }
+		 }
+	   })
+	 </script>
+  </body>
+</html>

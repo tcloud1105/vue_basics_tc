@@ -1,0 +1,96 @@
+<!DOCTYPE html><!--Version Declaration-->
+<html>
+  <head>
+      <title>Page Title</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	  <style>
+	  h1,h2,h3,h4,h5,h6,div,p,span{font-family:helvetica;padding:0;margin:0}
+	  .main_frame{width:300px;height:450px;border;1px black solid;float:left;margin:10px}
+	  .photo_frame{height:200px;width:300px;background:red}
+	  .photo_size{height:200px;width:300px;}
+	  .content_frame{position:realtive;padding:5px;width:290px;height:240px}
+	  .title{line-height:26px;font-size:18px;}
+	  .summary{line-height:20px;font-size:14px;}
+	  .category{position:absolute;bottom:5px;font-weight:bold;color:teal}
+	  .gap{height:15px;}
+	  </style>
+	  <script type="text/javascript" src="vue.js"></script>
+  </head>
+  <body>
+  
+    <div id="app">
+	   <div class="main_frame" v-for="element in info_set">
+	       <div class="photo_frame">
+		      <img v-bind:src="element.url" alt="image" class="photo_size"/>
+		   </div>
+		   <div class="content_frame">
+		     <div class="gap"></div>
+			 <div class="title">
+			    <h2>{{element.title}}</h2>
+			 </div>
+			  <div class="gap"></div>
+			 <div class="summary">
+			    <p>
+				  {{element.summary}}
+				</p>
+			 
+			 </div>
+			 <div class="gap"></div>
+			 <div class="category">
+			    <span>{{element.category}}</span>
+			 </div>
+		   </div>
+	   </div>
+	</div>
+    
+	 <script type="text/javascript">
+		
+	   var vm = new Vue({
+	     el:'#app',
+		 data:{
+		   info_set:[
+		      {
+		       url:"logo.jpg",
+		       title:"Vue logo",
+		       summary:"Vue logo",
+		      category:"Vue logo"
+		      },
+			  {
+		       url:"logo.jpg",
+		       title:"Vue logo",
+		       summary:"Vue logo",
+		      category:"Vue logo"
+		      },
+			  {
+		       url:"logo.jpg",
+		       title:"Vue logo",
+		       summary:"Vue logo",
+		      category:"Vue logo"
+		      },
+			  {
+		       url:"logo.jpg",
+		       title:"Vue logo",
+		       summary:"Vue logo",
+		      category:"Vue logo"
+		      },
+			  {
+		       url:"logo.jpg",
+		       title:"Vue logo",
+		       summary:"Vue logo",
+		      category:"Vue logo"
+		      },
+			  {
+		       url:"logo.jpg",
+		       title:"Vue logo",
+		       summary:"Vue logo",
+		      category:"Vue logo"
+		      }
+			  
+			  
+		   ]
+		 }
+	   })
+	 </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Vue Project</title>
+  <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+  <style>
+     h1,h2,h3,h4,h5,h6,div,p,span{font-family:helvetica;padding:0;margin:0;list-stle:none}
+     #app{background:red;color:white;}
+     #temp_root{background:yellow;color:blue;}
+  </style>
+  <script type='text/javascript' src='vue2.3.js'></script>
+  <body>
+     <div id='app'>
+        <p>{‌{$children.length}}</p>
+		<comp ref='comp'></comp>
+		<comp ref='comp'></comp>
+		<comp ref='comp'></comp>
+		<comp ref='comp'></comp><!--vm.$forceupdate() to force the dom to rerender-->
+     </div>
+    <template id='temp'>
+    <div id='temp_root'>
+      {‌{msg}}
+    </div>
+    </template>
+   <script type='text/javascript'>
+     Vue.component('comp',{
+     template:'#temp',
+     parent:'#app',
+     data:function(){
+       return{
+          msg : this.$parent.msg,
+         //this.prop
+         //test:'test defined in comp data'
+        }
+      },
+      //props:['prop']
+     })
+    var vm =new Vue({
+       el:'#app',
+       data:{
+          msg:'the new way also works...',
+         //test:this.$children[0].test
+         // DO NOT DO THIS!!!!!!!!!!!!
+     }
+    })
+ 
+    </script> 
+ </body>
+</html>

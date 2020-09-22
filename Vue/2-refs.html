@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Vue Project</title>
+ <meta http-equiv='content-type' content='text/html;charset=utf-8'>
+ <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+ <style>
+ *{margin:0;padding:0;}
+ body{padding:25px;font-size:55px;}
+ </style>
+ <script type='text/javascript' src='vue2.3.js'></script>
+ <body>
+    <div id='app'>
+       <comp ref='component'></comp>
+       <hr/>
+        <i>{‌{content}}</i>
+    </div>
+    <template id="temp">
+       <div>
+         <p>{‌{message}}</p>
+       </div>
+   </template>
+   <script type='text/javascript'>
+     Vue.component('comp',{
+       template:'#temp',
+       data:function(){
+       return{
+          message:'message defined in comp. data'
+       }
+      },
+     })
+   var vm = new Vue({
+     el:'#app',
+     data:{},
+     computed:{
+        content:function(){
+       //return this.$refs.component.message <!--this will NOT work-->
+       }
+     },
+     props:{},
+    methods:{
+    test:function(){
+       console.log(this.$refs.component.message)
+    }
+   },
+   })
+ 
+   </script> 
+ </body>
+</html>
