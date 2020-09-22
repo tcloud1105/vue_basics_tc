@@ -1,0 +1,56 @@
+<!DOCTYPE>
+<html>
+   <head>
+     <script src="vue2.3.js" type="text/javascript"></script>
+   </head>
+   <body>
+      <div id="app">
+	    <ul id='list' v-if="car_info_set.length">
+		   <li v-for="element in car_info_set">
+		      Brand is <b>{{element.brand}}</b>, model is <b>{{element.model}}</b> 
+			  Engine is <b>{{element.engine}}</b>, and gearbox is <b>{{element.gearbox}}</b> 
+		   </li>
+		</ul>
+		<p id="err_msg" v-else>{{err_msg}}</p>
+	  </div>
+	  <script type="text/javascript">
+	    var vm = new Vue({
+		  el:'#app',
+		  data:{
+		     car_info_set:[],
+			 error_msg:"Sorry, no car in record",
+			 ajax:null,
+			 url:'./interface.php'
+		  },
+		  created:function(){
+		    this.ajax = new XMLHttpRequest();
+			this.request();
+		  },
+		  methods:{
+		    request:function(){
+			   this.ajax.onreadystatechange = this.response;
+			   this.ajax.open('POST',this.url,true);
+			   this.ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			   this.ajax.send('range=all');
+			},
+			response:function(){
+			  if(this.ajax..readyState == 4){
+			    if(this.ajax.status == 200){
+				this.car_info_set = "";
+				  var result = JSON.parse(this.ajax.responseText);
+				  if(result[0]){
+				    this.car_info_set = result[1];
+				  }else{
+				    this.err_msg = result[1];
+				  }
+				}
+			  }
+			}
+		  }
+		})
+		setInterval(function(){
+		   vm.request();
+		},1000)
+	  </script>
+   </body>
+</html>
